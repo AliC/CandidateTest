@@ -12,13 +12,13 @@ namespace PairingTest.Unit.Tests.QuestionServiceWebApi
         public void ShouldGetQuestions()
         {
             //Arrange
-            var expectedTitle = "My expected questions";
-            var expectedQuestions = new Questionnaire() {QuestionnaireTitle = expectedTitle};
-            var fakeQuestionRepository = new FakeQuestionRepository() {ExpectedQuestions = expectedQuestions};
-            var questionsController = new QuestionsController(fakeQuestionRepository);
+            string expectedTitle = "My expected questions";
+            Questionnaire expectedQuestions = new Questionnaire() { QuestionnaireTitle = expectedTitle };
+            FakeQuestionRepository fakeQuestionRepository = new FakeQuestionRepository() { ExpectedQuestions = expectedQuestions };
+            QuestionsController questionsController = new QuestionsController(fakeQuestionRepository);
 
             //Act
-            var questions = questionsController.Get();
+            Questionnaire questions = questionsController.Get();
 
             //Assert
             Assert.That(questions.QuestionnaireTitle, Is.EqualTo(expectedTitle));
