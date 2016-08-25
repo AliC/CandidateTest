@@ -1,28 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Newtonsoft.Json;
+
 using PairingTest.Web.Models;
 
 namespace PairingTest.Web.Services
 {
     public class QuestionService : IQuestionService
     {
-        public QuestionnaireViewModel Get()
+        private IDataProvider _provider;
+
+        public QuestionService(IDataProvider provider)
         {
-            string expectedTitle = "My expected questions";
-            string expectedQuestion1Text = "Question 1 Text";
-            string expectedQuestion2Text = "Question 2 Text";
-            string expectedQuestion3Text = "Question 3 Text";
-            string expectedQuestion4Text = "Question 4 Text";
+            _provider = provider;
+        }
+
+        public async Task<QuestionnaireViewModel> Get()
+        {
+            string json = await _provider.Get();
+
+            Questionnaire model = JsonConvert.DeserializeObject<Questionnaire>(json);
+
+            return Map(model);
+        }
+
+        private QuestionnaireViewModel Map(Questionnaire model)
+        {
+            IList<QuestionnaireViewModel.QuestionViewModel> questions = new List<QuestionnaireViewModel.QuestionViewModel>();
+
+            for (int i = 0; i < model.QuestionsText.Count; i++)
+            {
+                questions.Add(new QuestionnaireViewModel.QuestionViewModel
+                {
+                    Question = model.QuestionsText[i]
+                });
+            }
 
             return new QuestionnaireViewModel
             {
-                QuestionnaireTitle = expectedTitle,
-                Questions = new List<QuestionnaireViewModel.QuestionViewModel>
-                {
-                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion1Text },
-                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion2Text },
-                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion3Text },
-                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion4Text }                }
+                QuestionnaireTitle = model.QuestionnaireTitle,
+                Questions = questions
             };
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 using Moq;
@@ -14,7 +15,7 @@ namespace PairingTest.Unit.Tests.Web
     public class QuestionnaireControllerTests
     {
         [Test]
-        public void ShouldGetQuestions()
+        public async Task ShouldGetQuestions()
         {
             //Arrange
 
@@ -32,18 +33,19 @@ namespace PairingTest.Unit.Tests.Web
                     new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion1Text },
                     new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion2Text },
                     new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion3Text },
-                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion4Text }                }
+                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion4Text }
+                }
             };
 
             IQuestionService questionService = Mock.Of<IQuestionService>();
-            Mock.Get(questionService).Setup(s => s.Get()).Returns(expectedQuestions);
+            Mock.Get(questionService).Setup(s => s.Get()).Returns(Task.FromResult(expectedQuestions));
 
             QuestionnaireController questionnaireController = new QuestionnaireController(questionService);
 
 
             //Act
 
-            ActionResult actionResult = questionnaireController.Index();
+            ActionResult actionResult = await questionnaireController.Index();
 
 
             //Assert

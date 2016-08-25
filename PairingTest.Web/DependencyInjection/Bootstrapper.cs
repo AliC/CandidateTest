@@ -30,6 +30,7 @@ namespace PairingTest.Web
         public static void RegisterTypes(IUnityContainer container)
         {
             container.RegisterType<IQuestionService, QuestionService>();
+            container.RegisterType<IDataProvider, DataProvider>();
         }
     }
 }

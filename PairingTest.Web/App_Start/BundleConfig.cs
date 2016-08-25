@@ -30,6 +30,7 @@ namespace PairingTest.Web.App_Start
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+               "~/Content/site.css",
                "~/Content/bootstrap.css"));
         }
     }

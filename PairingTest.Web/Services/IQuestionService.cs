@@ -1,9 +1,10 @@
-﻿using PairingTest.Web.Models;
+﻿using System.Threading.Tasks;
+using PairingTest.Web.Models;
 
 namespace PairingTest.Web.Services
 {
     public interface IQuestionService
     {
-        QuestionnaireViewModel Get();
+        Task<QuestionnaireViewModel> Get();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 
 using PairingTest.Web.Models;
 using PairingTest.Web.Services;
@@ -14,15 +15,9 @@ namespace PairingTest.Web.Controllers
             _questionService = questionService;
         }
 
-        /* ASYNC ACTION METHOD... IF REQUIRED... */
-        //        public async Task<ViewResult> Index()
-        //        {
-        //        }
-
-        //TODO ADC 20160824: probably should be async as suggested by above comment as we'll be retrieving data from an API
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            QuestionnaireViewModel model = _questionService.Get();
+            QuestionnaireViewModel model = await _questionService.Get();
 
             return View(model);
         }
