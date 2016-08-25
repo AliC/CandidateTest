@@ -1,0 +1,14 @@
+﻿@model IEnumerable<QuestionnaireViewModel.QuestionViewModel>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @foreach (QuestionnaireViewModel.QuestionViewModel question in Model)
+        {
+            @Html.EditorFor(q => question, "_Question")
+        }
+    </div>
+}

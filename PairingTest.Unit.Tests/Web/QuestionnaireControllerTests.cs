@@ -27,13 +27,12 @@ namespace PairingTest.Unit.Tests.Web
             QuestionnaireViewModel expectedQuestions = new QuestionnaireViewModel
             {
                 QuestionnaireTitle = expectedTitle,
-                QuestionsText = new List<string>
+                Questions = new List<QuestionnaireViewModel.QuestionViewModel>
                 {
-                    expectedQuestion1Text,
-                    expectedQuestion2Text,
-                    expectedQuestion3Text,
-                    expectedQuestion4Text
-                }
+                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion1Text },
+                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion2Text },
+                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion3Text },
+                    new QuestionnaireViewModel.QuestionViewModel { Question = expectedQuestion4Text }                }
             };
 
             IQuestionService questionService = Mock.Of<IQuestionService>();
@@ -55,12 +54,12 @@ namespace PairingTest.Unit.Tests.Web
 
             QuestionnaireViewModel model = (actionResult as ViewResult).ViewData.Model as QuestionnaireViewModel;
             Assert.That(model.QuestionnaireTitle, Is.EqualTo(expectedTitle));
-            Assert.That(model.QuestionsText.Count, Is.EqualTo(expectedQuestions.QuestionsText.Count));
+            Assert.That(model.Questions.Count, Is.EqualTo(expectedQuestions.Questions.Count));
 
-            Assert.That(model.QuestionsText[0], Is.EqualTo(expectedQuestion1Text));
-            Assert.That(model.QuestionsText[1], Is.EqualTo(expectedQuestion2Text));
-            Assert.That(model.QuestionsText[2], Is.EqualTo(expectedQuestion3Text));
-            Assert.That(model.QuestionsText[3], Is.EqualTo(expectedQuestion4Text));
+            Assert.That(model.Questions[0].Question, Is.EqualTo(expectedQuestion1Text));
+            Assert.That(model.Questions[1].Question, Is.EqualTo(expectedQuestion2Text));
+            Assert.That(model.Questions[2].Question, Is.EqualTo(expectedQuestion3Text));
+            Assert.That(model.Questions[3].Question, Is.EqualTo(expectedQuestion4Text));
             
         }
     }

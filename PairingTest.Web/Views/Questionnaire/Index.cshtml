@@ -1,10 +1,8 @@
-﻿@model PairingTest.Web.Models.QuestionnaireViewModel
+﻿@model QuestionnaireViewModel
 
-<html>
-    <head>
-        <title>@Model.QuestionnaireTitle</title>
-    </head>
-    <body>
-              
-    </body>
-</html>
+@{
+    ViewBag.Title = Model.QuestionnaireTitle;
+}
+
+@Html.EditorFor(m => Model.Questions, "_Questions")
+
