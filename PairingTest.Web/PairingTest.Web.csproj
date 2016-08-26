@@ -157,11 +157,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="DependencyInjection\Bootstrapper.cs" />
     <Compile Include="Controllers\QuestionnaireController.cs" />
-    <Compile Include="Services\DataProvider.cs" />
+    <Compile Include="Providers\DataProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Services\IDataProvider.cs" />
+    <Compile Include="Providers\IDataProvider.cs" />
     <Compile Include="Services\IQuestionService.cs" />
     <Compile Include="Models\QuestionnaireViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

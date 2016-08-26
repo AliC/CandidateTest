@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 
 using PairingTest.Web.Models;
+using PairingTest.Web.Providers;
 using PairingTest.Web.Services;
 
 namespace PairingTest.Unit.Tests.Web

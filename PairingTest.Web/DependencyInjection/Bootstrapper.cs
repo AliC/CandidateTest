@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 
 using Microsoft.Practices.Unity;
+using PairingTest.Web.Providers;
 using Unity.Mvc4;
 
 using PairingTest.Web.Services;

@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PairingTest.Web.Services
+namespace PairingTest.Web.Providers
 {
     public class DataProvider : IDataProvider
     {
