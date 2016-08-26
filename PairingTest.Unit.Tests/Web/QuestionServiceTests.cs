@@ -23,7 +23,7 @@ namespace PairingTest.Unit.Tests.Web
             string expectedQuestion3Text = "Question 3 Text";
             string expectedQuestion4Text = "Question 4 Text";
 
-            Questionnaire questionnaireViewModel = new Questionnaire
+            Questionnaire questionnaire = new Questionnaire
             {
                 QuestionnaireTitle = expectedTitle,
                 QuestionsText = new List<string>
@@ -35,7 +35,7 @@ namespace PairingTest.Unit.Tests.Web
                 }
             };
 
-            string serializedModel = JsonConvert.SerializeObject(questionnaireViewModel);
+            string serializedModel = JsonConvert.SerializeObject(questionnaire);
 
             IDataProvider provider = Mock.Of<IDataProvider>();
             Mock.Get(provider).Setup(p => p.Get()).Returns(Task.FromResult(serializedModel));
@@ -44,6 +44,13 @@ namespace PairingTest.Unit.Tests.Web
             QuestionnaireViewModel actualModel = await service.Get();
 
             Assert.IsNotNull(actualModel);
+            Assert.That(actualModel.QuestionnaireTitle, Is.EqualTo(expectedTitle));
+
+            Assert.That(actualModel.Questions.Count, Is.EqualTo(4));
+            Assert.That(actualModel.Questions[0].Question, Is.EqualTo(expectedQuestion1Text));
+            Assert.That(actualModel.Questions[1].Question, Is.EqualTo(expectedQuestion2Text));
+            Assert.That(actualModel.Questions[2].Question, Is.EqualTo(expectedQuestion3Text));
+            Assert.That(actualModel.Questions[3].Question, Is.EqualTo(expectedQuestion4Text));
         }
     }
 }
