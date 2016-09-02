@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
 using QuestionServiceWebApi.Interfaces;
 
 namespace QuestionServiceWebApi.Controllers
@@ -29,8 +31,9 @@ namespace QuestionServiceWebApi.Controllers
         }
 
         // POST api/questions
-        public void Post([FromBody]string value)
+        public int Post([FromBody]IEnumerable<string> answers)
         {
+            return _questionRepository.MarkAnswers(answers.ToList());
         }
 
         // PUT api/questions/5

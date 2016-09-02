@@ -5,19 +5,43 @@ namespace QuestionServiceWebApi
 {
     public class QuestionRepository : IQuestionRepository
     {
+        private IList<string> _answers = new List<string>
+        {
+            { "Havana" },
+            { "Paris" },
+            { "Warsaw" },
+            { "Berlin" }
+        };
+
+
         public Questionnaire GetQuestionnaire()
         {
             return new Questionnaire
             {
                 QuestionnaireTitle = "Geography Questions",
                 QuestionsText = new List<string>
-                                           {
-                                               "What is the capital of Cuba?",
-                                               "What is the capital of France?",
-                                               "What is the capital of Poland?",
-                                               "What is the capital of Germany?"
-                                           }
+                {
+                    "What is the capital of Cuba?",
+                    "What is the capital of France?",
+                    "What is the capital of Poland?",
+                    "What is the capital of Germany?"
+                }
             };
+        }
+
+        public int MarkAnswers(IList<string> answers)
+        {
+            decimal correctAnswers = 0;
+
+            for(int i = 0; i < _answers.Count; i++)
+            {
+                if (_answers[i] == answers[i])
+                {
+                    correctAnswers++;
+                }
+            }
+
+            return (int)(correctAnswers / _answers.Count * 100);
         }
     }
 }

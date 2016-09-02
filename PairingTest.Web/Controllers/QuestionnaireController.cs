@@ -26,16 +26,21 @@ namespace PairingTest.Web.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Index(QuestionnaireViewModel questionnaire)
+        public async Task<ActionResult> Index(QuestionnaireViewModel questionnaire)
         {
             ContentResult result = new ContentResult();
 
             if (ModelState.IsValid)
             {
+
+                int percentage = await _questionService.MarkAnswers(questionnaire.Questions.Select(q => q.Answer));
+                
                 result.Content = string.Join("<br />",
                     questionnaire.QuestionnaireTitle,
                     string.Join(",", questionnaire.Questions.Select(q => q.Answer)),
                     "Thank you. Your answers have been submitted.");
+
+                result.Content += string.Format("<br /><br />You scored {0}%", percentage);
 
                 return result;
             }

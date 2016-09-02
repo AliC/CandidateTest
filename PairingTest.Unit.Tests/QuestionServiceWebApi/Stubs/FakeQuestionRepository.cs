@@ -1,4 +1,5 @@
-﻿using QuestionServiceWebApi;
+﻿using System.Collections.Generic;
+using QuestionServiceWebApi;
 using QuestionServiceWebApi.Interfaces;
 
 namespace PairingTest.Unit.Tests.QuestionServiceWebApi.Stubs
@@ -9,6 +10,11 @@ namespace PairingTest.Unit.Tests.QuestionServiceWebApi.Stubs
         public Questionnaire GetQuestionnaire()
         {
             return ExpectedQuestions;
+        }
+
+        public int MarkAnswers(IList<string> answers)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

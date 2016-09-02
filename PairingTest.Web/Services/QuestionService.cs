@@ -26,6 +26,11 @@ namespace PairingTest.Web.Services
             return Map(model);
         }
 
+        public async Task<int> MarkAnswers(IEnumerable<string> answers)
+        {
+            return await _provider.MarkAnswers(answers);
+        }
+
         private QuestionnaireViewModel Map(Questionnaire model)
         {
             IList<QuestionnaireViewModel.QuestionViewModel> questions = new List<QuestionnaireViewModel.QuestionViewModel>();
