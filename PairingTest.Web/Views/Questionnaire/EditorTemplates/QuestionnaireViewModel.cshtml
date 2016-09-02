@@ -1,0 +1,19 @@
+﻿@model QuestionnaireViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.HiddenFor(q => q.QuestionnaireTitle)
+        <hr/>
+
+        @for (int i = 0; i < Model.Questions.Count; i++)
+        {
+            @Html.EditorFor(q => Model.Questions[i])
+        }
+
+    </div>
+
+    <input type="submit" />
+}
